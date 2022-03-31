@@ -6,9 +6,8 @@ const Cart = ({ cart, products, handleClearCart }) => {
   const [freeProduct, setFreeProduct] = useState({});
 
   const handleOffer = () => {
-    let rendomNumber = Math.floor(Math.random()*products.length)
-    console.log(products.length)
-    console.log(rendomNumber)
+    let rendomNumber = Math.floor(Math.random() * products.length)
+    setFreeProduct(products[rendomNumber])
   }
   return (
     <div className='cart'>
@@ -35,6 +34,15 @@ const Cart = ({ cart, products, handleClearCart }) => {
       ))}
       <p>Buy one get one free</p>
       <button onClick={handleOffer} className="offer-button">Get one for me</button>
+      {Object.keys(freeProduct).length > 0 && (<div className='cart-item'>
+        <img src={freeProduct.pairImage} alt='' />
+        <div>
+          <p>
+            {freeProduct.name} {freeProduct.color}
+          </p>
+          <p>$ {freeProduct.price}</p>
+        </div>
+      </div>)}
     </div>
   );
 };
